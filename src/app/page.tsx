@@ -6,21 +6,23 @@ import { useEffect, useState } from "react";
 export default function Home() {
 
   const [pokemon,setPokemon]=useState([])
+  const [pokemonSearched,setpokemonSearched]=useState('')
 
-  const handleClick = async () => {
+  const handleClick = async () => { 
+
     try {
-      const poketomName:String = 'Gabite' //preciso verificar como tornar dinamico
-      const pokemonData:any = await getPokemon(poketomName)//preciso pegar o nome de algum pokemon
+      const pokemonName:String = pokemonSearched //preciso verificar como tornar dinamico
+      const pokemonData:any = await getPokemon(pokemonName)//preciso pegar o nome de algum pokemon
       console.log(pokemonData.data)
       setPokemon(pokemonData.data)
     } catch (err) {
       console.log(err)
     }
   }
+  const handleChange = (event) => { //nesse caso precisa de async ? sera q estou tentando rodar assincronamente ?
+    setpokemonSearched(event.target.value)
+  }
 
- useEffect(()=>{
-    ;handleClick()
-  },[])
 
   
   return (
@@ -32,24 +34,33 @@ export default function Home() {
     <main>
       <h1>SELECIONE UM POKEMON E VEJA ELE POR COMPLETO</h1>
       <section>
-        <ul>
-          {pokemon && (
-             (
+        <input 
+        type="text" 
+        value={pokemonSearched}
+        onChange={handleChange}/>
+
+        <button onClick={handleClick}>Pesquisar</button>
+
+        <ul> 
+           {pokemon.name ? (
               <li >
                 <p>Nome: {pokemon.name}</p>
-                <p>Typo: {pokemon.types}</p>
-                {/* <Image src={`${pokemon.image_url}`} alt={""} width={300} height={200}/> */}
-                
-              </li>
-            ))
+                <p>Typo: {pokemon.types}</p> 
+                <Image src={`${pokemon.image_url}`} alt={""} width={300} height={200}/> 
+             </li>
+            ):
+            <p>nao sei</p>
            }
         </ul>
       </section>
-      <button onClick={handleClick}>Clique aqui</button>
+
     </main>
     <footer></footer>
   </>
   )}
+
+
+
     // <><main className="flex min-h-screen flex-col items-center justify-between p-24">
     //   <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
     //     <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
