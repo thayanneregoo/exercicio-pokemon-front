@@ -18,19 +18,30 @@ export default function Page({ params }: { params: { id: string } }) {
 
     return(
     <>
+ 
 
-    <ul> 
+    <main className="h-lvh">
+      <div className="flex justify-center aling-items-center bg-gray-200" > 
            {pokemon.name ? (
-              <li >
+              <section className="rounded-3xl bg-gray-900 text-white px-4 py-8">
+                <div className="flex justify-center">
+                  <h1 className="">{pokemon.name}</h1>
+                </div>
+                
                 <Image src={`${pokemon.image_url}`} alt={""} width={300} height={200}/> 
-                <p>Nome: {pokemon.name}</p>
+                
                 <p>Tipo: {pokemon.types.map((tipo:string)=> `${tipo} `)}</p> 
-                <p>Fraquezas: {pokemon.weaknesses.map((weakness:string)=> `${weakness} `)}</p>
-             </li>
+                <p>Fraquezas: {pokemon.weaknesses.map((weakness:string)=> (
+                  `${weakness} `))}</p>
+                <p> </p>
+             </section>
             ):
-            <p>Digite Pokemon válido</p>
+            <p className="rounded-md bg-gray-900 text-white">Digite Pokemon válido</p>
            } 
-   </ul>
+      </div>
+    </main>
+
+    
     </>
     
     ) 

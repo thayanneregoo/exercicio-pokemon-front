@@ -40,16 +40,16 @@ export default function Home() {
 
     <>
       <header>
-        <div className="relative isolate overflow-hidden bg-gray-900 py-16 sm:py-2 lg:py-3 ">
+        <div className="relative isolate overflow-hidden bg-gray-900 py-16 sm:py-2 lg:py-3 flex justify-center">
         <Image src={"/pokemon-logo.png"} alt={""} width={300} height={200} className="" />
         </div>
       </header>
       <main>
-        <div className="relative isolate overflow-hidden bg-gray-900 py-16 sm:py-2 lg:py-3">
+      <div className="w-full relative isolate overflow-hidden bg-gray-900 py-16 sm:py-2 lg:py-3 flex justify-center items-center">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
               <div className="max-w-xl lg:max-w-lg">
-                <div className="mt-6 flex max-w-md gap-x-4">
+                <div className="mt-6 flex max-w-md gap-x-4 ">
                   <input
                     type="text"
                     value={pokemonSearched}
@@ -59,7 +59,7 @@ export default function Home() {
                   <button 
                   type="submit" 
                   onClick={() => router.push(`/${pokemonSearched}`)}
-                  className="flex-none rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Pesquisar</button>
+                  className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Pesquisar</button>
                 </div>
               </div>
             </div>
@@ -74,11 +74,14 @@ export default function Home() {
                   <> <div key={pokemon.id} >
                     <Link href={`/${pokemon.id}`} className="group">
                       <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                        <Image alt="" src={`${pokemon.image_url}`} className="h-full w-full object-cover object-center group-hover:opacity-75" width={200} height={200} />
+                        <Image alt={`${pokemon.name}`} src={`${pokemon.image_url}`} className="h-full w-full object-cover object-center group-hover:opacity-50" width={200} height={200} />
                       </div>
                       <p className="mt-1 text-lg font-medium text-white">{pokemon.name}</p>
-                      <h3 className="mt-4 text-sm text-gray-700"> {pokemon.types}</h3>
-
+                      <div className="flex space-x-2"> 
+                      {pokemon.types.map((tipo:any)=>(
+                        <h3 className="rounded-md bg-white px-1 py-1 text-sm font-semibold text-gray-700 shadow-sm ">{tipo}</h3>
+                      ))}
+                      </div>
                     </Link>
                   </div></>
                 ))}
