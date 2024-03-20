@@ -39,11 +39,7 @@ export default function Home() {
   return (
 
     <>
-      <header>
-        <div className="relative isolate overflow-hidden bg-gray-900 py-16 sm:py-2 lg:py-3 flex justify-center">
-        <Image src={"/pokemon-logo.png"} alt={""} width={300} height={200} className="" />
-        </div>
-      </header>
+
       <main>
       <div className="w-full relative isolate overflow-hidden bg-gray-900 py-16 sm:py-2 lg:py-3 flex justify-center items-center">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
